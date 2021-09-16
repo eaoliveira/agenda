@@ -59,4 +59,12 @@ public class Endereco {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

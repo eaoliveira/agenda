@@ -24,6 +24,8 @@ public class Email {
         this.contato = contato;
     }
 
+    public Email(){}
+
     public Integer getId() {
         return id;
     }
@@ -55,4 +57,6 @@ public class Email {
     public void setContato(Contato contato) {
         this.contato = contato;
     }
+
+
 }

@@ -77,4 +77,7 @@ public class Usuario implements UserDetails {
         return true;
     }
 
+    public List<Contato> getContatoList() {
+        return contatoList;
+    }
 }

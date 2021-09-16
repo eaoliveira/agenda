@@ -28,6 +28,8 @@ public class ContatoServiceImpl implements ContatoService{
     @Override
     public Contato adicionaTelefoneContato(Integer id, Telefone telefone) {
         Contato contato = contatoRepository.getById(id);
+        System.out.println(contato.getTelefones().toString());
+        telefone.setContato(contato);
         contato.adicionaTelefone(telefone);
         return adicionaContato(contato);
     }
@@ -35,6 +37,7 @@ public class ContatoServiceImpl implements ContatoService{
     @Override
     public Contato adicionaEnderecoContato(Integer id, Endereco endereco) {
         Contato contato = contatoRepository.getById(id);
+        endereco.setContato(contato);
         contato.adicionaEndereco(endereco);
         return adicionaContato(contato);
     }
@@ -42,6 +45,7 @@ public class ContatoServiceImpl implements ContatoService{
     @Override
     public Contato adicionaEmailContato(Integer id, Email email) {
         Contato contato = contatoRepository.getById(id);
+        email.setContato(contato);
         contato.adicionaEmail(email);
         return adicionaContato(contato);
     }

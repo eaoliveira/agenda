@@ -17,7 +17,7 @@ public class Telefone {
     private Long numero;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Contato contato;
 
     public Telefone(TelefoneTipo tipo, Integer DDD, Integer DDI, Long numero, Contato contato) {
@@ -49,5 +49,29 @@ public class Telefone {
 
     public Long getNumero() {
         return numero;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTipo(TelefoneTipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setDDD(Integer DDD) {
+        this.DDD = DDD;
+    }
+
+    public void setDDI(Integer DDI) {
+        this.DDI = DDI;
+    }
+
+    public void setNumero(Long numero) {
+        this.numero = numero;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
     }
 }

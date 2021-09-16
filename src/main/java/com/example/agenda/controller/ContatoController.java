@@ -1,8 +1,6 @@
 package com.example.agenda.controller;
 
-import com.example.agenda.model.Contato;
-import com.example.agenda.model.Telefone;
-import com.example.agenda.model.Usuario;
+import com.example.agenda.model.*;
 import com.example.agenda.model.dto.ContatoInput;
 import com.example.agenda.repository.ContatoRepository;
 import com.example.agenda.repository.UsuarioRepository;
@@ -42,18 +40,42 @@ public class ContatoController {
 
     }
 
-    @PostMapping("salvar/telefone/{id}")
+    @PostMapping("salvar/{id}/telefone")
     public ResponseEntity adicionaTelefone(
             @PathVariable Integer id,
             @RequestBody
             Telefone telefone){
 
-        return   ResponseEntity.ok().body(  contatoService.adicionaTelefoneContato(id,telefone));
+        try {
+            return   ResponseEntity.ok().body(  contatoService.adicionaTelefoneContato(id,telefone));
+        }catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
+        }
+    }
 
-//        try {
-//            return   ResponseEntity.ok().body(  contatoService.adicionaTelefoneContato(id,telefone));
-//        }catch (Exception e){
-//            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
-//        }
+    @PostMapping("salvar/{id}/email")
+    public ResponseEntity adicionaEmail(
+            @PathVariable Integer id,
+            @RequestBody
+                    Email email){
+
+        try {
+            return   ResponseEntity.ok().body(  contatoService.adicionaEmailContato(id,email));
+        }catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
+        }
+    }
+
+    @PostMapping("salvar/{id}/endereco")
+    public ResponseEntity adicionaEndereco(
+            @PathVariable Integer id,
+            @RequestBody
+                    Endereco endereco){
+
+        try {
+            return   ResponseEntity.ok().body(  contatoService.adicionaEnderecoContato(id,endereco));
+        }catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
+        }
     }
 }

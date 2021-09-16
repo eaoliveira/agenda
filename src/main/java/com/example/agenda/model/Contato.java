@@ -56,19 +56,19 @@ public class Contato {
 
     public Telefone adicionaTelefone(Telefone telefone){
 
-        if(!this.getTelefones().stream().map(f->f.getNumero().equals(telefone.getNumero())&&f.getDDD().equals(telefone.getDDD())).collect(Collectors.toList()).isEmpty()){
-            return  null;
-        }
-
+//        if(!this.getTelefones().stream().map(f->f.getNumero().equals(telefone.getNumero())&&f.getDDD().equals(telefone.getDDD())).collect(Collectors.toList()).isEmpty()){
+//            return  null;
+//        }
+        System.out.println(telefones.toString());
         this.telefones.add(telefone);
         return telefone;
     }
 
     public Endereco adicionaEndereco(Endereco endereco){
 
-        if(!this.getEnderecos().stream().map(f->f.getRua().equals(endereco.getRua())&&f.getNumero().equals(endereco.getNumero())).collect(Collectors.toList()).isEmpty()){
-            return  null;
-        }
+//        if(!this.getEnderecos().stream().map(f->f.getRua().equals(endereco.getRua())&&f.getNumero().equals(endereco.getNumero())).collect(Collectors.toList()).isEmpty()){
+//            return  null;
+//        }
 
         this.enderecos.add(endereco);
         return endereco;
@@ -76,9 +76,9 @@ public class Contato {
 
     public Email adicionaEmail(Email email){
 
-        if(!this.getEmails().stream().map(f->f.getEmail().equals(f.getEmail())).collect(Collectors.toList()).isEmpty()){
-            return  null;
-        }
+//        if(!this.getEmails().stream().map(f->f.getEmail().equals(f.getEmail())).collect(Collectors.toList()).isEmpty()){
+//            return  null;
+//        }
 
         this.emails.add(email);
         return email;

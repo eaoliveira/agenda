@@ -1,5 +1,6 @@
 package com.example.agenda.controller;
 
+import com.example.agenda.model.Contato;
 import com.example.agenda.model.Usuario;
 import com.example.agenda.model.dto.TokenDto;
 import com.example.agenda.model.dto.UsuarioInput;
@@ -15,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("usuarios")
@@ -33,6 +35,21 @@ public class UsuarioController {
     @GetMapping
     public List<Usuario> buscarTodos(){
         return usuarioRepository.findAll();
+    }
+
+    @PreAuthorize("authentication.principal.id == #id")
+    @GetMapping("/contatos/{id}")
+    public ResponseEntity buscarTodosContatos(
+            @PathVariable Integer id
+    ){
+        Optional<Usuario> usuario =  usuarioRepository.findById(id);
+
+        System.out.println(usuario.get().getContatoList().toString());
+
+        if (usuario.isPresent()){
+            return ResponseEntity.ok().body(usuario.get().getContatoList());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
     }
 
     @PostMapping
