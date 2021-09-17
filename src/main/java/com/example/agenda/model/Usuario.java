@@ -80,4 +80,8 @@ public class Usuario implements UserDetails {
     public List<Contato> getContatoList() {
         return contatoList;
     }
+
+    public void setContatoList(List<Contato> contatoList) {
+        this.contatoList = contatoList;
+    }
 }

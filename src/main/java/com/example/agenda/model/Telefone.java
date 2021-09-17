@@ -71,7 +71,9 @@ public class Telefone {
         this.numero = numero;
     }
 
-    public void setContato(Contato contato) {
+    public void setContato(Contato contato){
         this.contato = contato;
-    }
+    };
+
+
 }

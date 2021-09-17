@@ -1,5 +1,6 @@
 package com.example.agenda.controller;
 
+import com.example.agenda.CustomExceptions;
 import com.example.agenda.model.*;
 import com.example.agenda.model.dto.ContatoInput;
 import com.example.agenda.repository.ContatoRepository;
@@ -34,7 +35,11 @@ public class ContatoController {
 
             return  ResponseEntity.ok().body(contato);
 
-        }catch (Exception e){
+        }
+        catch (CustomExceptions exceptions){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( exceptions.getMessage());
+        }
+        catch (Exception e){
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
         }
 
@@ -48,7 +53,11 @@ public class ContatoController {
 
         try {
             return   ResponseEntity.ok().body(  contatoService.adicionaTelefoneContato(id,telefone));
-        }catch (Exception e){
+        }
+        catch (CustomExceptions exceptions){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( exceptions.getMessage());
+        }
+        catch (Exception e){
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
         }
     }
@@ -61,7 +70,11 @@ public class ContatoController {
 
         try {
             return   ResponseEntity.ok().body(  contatoService.adicionaEmailContato(id,email));
-        }catch (Exception e){
+        }
+        catch (CustomExceptions exceptions){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( exceptions.getMessage());
+        }
+        catch (Exception e){
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
         }
     }
@@ -74,7 +87,11 @@ public class ContatoController {
 
         try {
             return   ResponseEntity.ok().body(  contatoService.adicionaEnderecoContato(id,endereco));
-        }catch (Exception e){
+        }
+        catch (CustomExceptions exceptions){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( exceptions.getMessage());
+        }
+        catch (Exception e){
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
         }
     }
