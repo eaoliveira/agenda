@@ -2,6 +2,7 @@ package com.example.agenda.model.dto;
 
 import com.example.agenda.model.Contato;
 import com.example.agenda.model.Usuario;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -62,4 +63,5 @@ public class ContatoInput {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
 }

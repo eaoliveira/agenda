@@ -34,6 +34,18 @@ public class ContatoServiceImpl implements ContatoService{
     }
 
     @Override
+    public Contato getContatoByid(Integer id) {
+        return contatoRepository.getById(id);
+    }
+
+    @Override
+    public Contato salvarFoto(Integer id, String foto) {
+        Contato contato = contatoRepository.getById(id);
+        contato.setFoto(foto);
+        return contatoRepository.save(contato);
+    }
+
+    @Override
     public Contato adicionaTelefoneContato(Integer id, Telefone telefone) throws CustomExceptions {
         Contato contato = contatoRepository.getById(id);
         System.out.println(contato.getTelefones().toString());

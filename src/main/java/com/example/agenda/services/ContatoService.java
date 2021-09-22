@@ -14,6 +14,10 @@ public interface ContatoService {
 
     public void deletaContato(Integer id);
 
+    public Contato getContatoByid(Integer id);
+
+    public Contato salvarFoto(Integer id,String foto);
+
     public Contato adicionaTelefoneContato(Integer id, Telefone telefone) throws CustomExceptions;
 
     public Contato adicionaEnderecoContato(Integer id, Endereco endereco) throws CustomExceptions;

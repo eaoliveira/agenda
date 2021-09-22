@@ -3,6 +3,7 @@ package com.example.agenda.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Contato {
    private String Sobrenome;
    private String  apelido;
    private LocalDate dataNascimento;
+   private String foto;
 
     public Contato(Usuario usuario, String nome, String sobrenome, String apelido, LocalDate dataNascimento) {
         this.usuario = usuario;
@@ -87,6 +89,21 @@ public class Contato {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    @Override
+    public String toString() {
+        return "Contato{" +
+                "id=" + id +
+                ", usuario=" + usuario +
+                ", telefones=" + telefones +
+                ", emails=" + emails +
+                ", enderecos=" + enderecos +
+                ", Nome='" + Nome + '\'' +
+                ", Sobrenome='" + Sobrenome + '\'' +
+                ", apelido='" + apelido + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                '}';
     }
 
     public void setAgenda(Usuario usuario) {
@@ -149,5 +166,11 @@ public class Contato {
         this.dataNascimento = dataNascimento;
     }
 
+    public String getFoto() {
+        return foto;
+    }
 
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

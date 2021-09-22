@@ -3,14 +3,22 @@ package com.example.agenda.controller;
 import com.example.agenda.CustomExceptions;
 import com.example.agenda.model.*;
 import com.example.agenda.model.dto.ContatoInput;
+import com.example.agenda.model.dto.EmailInput;
 import com.example.agenda.repository.ContatoRepository;
 import com.example.agenda.repository.UsuarioRepository;
 import com.example.agenda.services.ContatoService;
+import com.example.agenda.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @RestController
 @RequestMapping("contatos")
@@ -20,7 +28,14 @@ public class ContatoController {
     ContatoService contatoService;
 
     @Autowired
+    EmailService emailService;
+
+    @Autowired
     UsuarioRepository usuarioRepository;
+
+
+
+
 
     @PreAuthorize("authentication.principal.id == #contatoInput.usuarioId")
     @PostMapping("salvar")
@@ -59,6 +74,53 @@ public class ContatoController {
         }
         catch (Exception e){
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel adicionar contato");
+        }
+    }
+
+    @PutMapping("salvar/{id}/photo")
+    public ResponseEntity uploadPhoto(
+            @PathVariable Integer id,
+            @RequestBody MultipartFile foto
+            )
+    {
+        File file = new File("/Users/ednaalvesdeoliveira/Downloads/upload/"+foto.getOriginalFilename());
+        try {
+            file.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(foto.getBytes());
+            fileOutputStream.close();
+            String enderecofoto=file.getAbsolutePath();
+            contatoService.salvarFoto(id,enderecofoto);
+            return ResponseEntity.ok().body("Upload Realizado");
+        }catch (IOException e){
+            e.printStackTrace();
+
+            return ResponseEntity.ok().body("Upload NÃO REALIZADO");
+        }
+
+
+    }
+
+
+
+
+    @PostMapping("compartilhar/{id}")
+    public ResponseEntity compartilharContato(
+            @PathVariable Integer id,
+            @RequestBody
+                    EmailInput emailInput){
+
+        try {
+           Contato contato =  contatoService.getContatoByid(id);
+
+           emailInput.setCorpo(contato.toString());
+
+           emailService.enviaEmail(emailInput);
+
+            return   ResponseEntity.ok().body("Email enviado");
+        }
+        catch (Exception e){
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Não foi possivel enviar email");
         }
     }
 
